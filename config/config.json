@@ -3,7 +3,8 @@
     "username": "root",
     "password": "1234",
     "database": "database_development",
-    "host": "localhost:3306",
+    "host": "localhost",
+    "port": "3306",
     "dialect": "mysql"
   },
   "test": {
