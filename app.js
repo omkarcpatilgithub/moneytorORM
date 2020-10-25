@@ -1,19 +1,23 @@
 // 
 // const config = require('./config/config.json')[process.env.NODE_ENV];
 const config = require('./config/config.json')["development"];
-var Sequelize = require('sequelize'); console.log(config);	
+var Sequelize = require('sequelize'); console.log(config);
 
 // creating connection with mysql 
-var connetion = new Sequelize('demo_schema','root','1234',{...config});
+var connection = new Sequelize('development','root','1234',{...config});
 
 // to define a model in sequelize, .define() method
-var Article = connetion.define('article',{  // makes article the name of the model
+var Article = connection.define('article',{  // makes article the name of the model
 	title: {
 	type: Sequelize.STRING,	// all properties for medol/ database table
 },
 	body: {
 	type: Sequelize.TEXT,	
 }
+//    approved: {
+//    type: Sequelize.BOOLEAN,
+//    defaultValue: false
+//    }
 });
 
 
@@ -25,14 +29,27 @@ var Article = connetion.define('article',{  // makes article the name of the mod
 // }); 
 
 
-// this will populate the table article with given data
-connetion.sync().then(function () {
-	Article.create({
-		title: 'some title',
-		body: 'some long body for some title'
 
-	});
-});
+// this will populate the table article with given data
+//connetion.sync().then(function () {
+//	Article.create({
+//		title: 'some title',
+//		body: 'some long body for some title'
+//
+//	});
+//});
+
+// this is mostly used for many to many relations
+connection.sync({
+force: true
+})
+.then(function () {
+var articleInstance = Article.build({
+    title: 'SOme title',
+    body: 'SOme body'
+})
+articleInstance.save()
+})
 
 
 // to find an entry with id
