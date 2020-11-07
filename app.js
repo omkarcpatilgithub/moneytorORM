@@ -39,22 +39,22 @@ var Article = connection.define('article',{  // makes article the name of the mo
 //	});
 //});
 
-// this is mostly used for many to many relations
-connection.sync({
-force: true
-})
-.then(function () {
-var articleInstance = Article.build({
-    title: 'SOme title',
-    body: 'SOme body'
-})
-articleInstance.save()
-})
+//// this is mostly used for many to many relations
+//connection.sync({
+//force: true
+//})
+//.then(function () {
+//var articleInstance = Article.build({
+//    title: 'SOme title',
+//    body: 'SOme body'
+//})
+//articleInstance.save()
+//})
 
 
 // to find an entry with id
-// connetion.sync().then(function () {
-// 	Article.findById(1).then(function(article){
-// 		console.log(article.dataValues)
-// 	})
-// })
+connection.sync().then(function () {
+Article.findById(1).then(function(article){
+    console.log(article.dataValues)
+})
+})
